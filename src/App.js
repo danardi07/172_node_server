@@ -1,25 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+// app.js
+const express = require("express");
+const app = express();
+const todoRoutes = require("./todo"); // import router
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+app.use(express.json()); // biar bisa baca JSON body
+app.use("/todos", todoRoutes); // prefix endpoint
 
-export default App;
+app.listen(3000, () => {
+  console.log("Server berjalan di http://localhost:3000");
+});
+
+module.exports = app;
